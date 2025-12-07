@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<style>
+    /* Kiểu dáng cho container chính */
+    .personal-info-container {
+        max-width: 700px; /* Tăng chiều rộng tối đa */
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #f8f9fa; /* Màu nền nhẹ hơn */
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Hộp đổ bóng sắc nét hơn */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Kiểu dáng cho tiêu đề */
+    .personal-info-container h2 {
+        text-align: center;
+        color: #007bff; /* Màu xanh dương hiện đại */
+        margin-bottom: 25px;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+        font-weight: 600;
+    }
+
+    /* Kiểu dáng cho bảng */
+    .info-table {
+        width: 100%;
+        border-collapse: separate; /* Cho phép bo tròn góc */
+        border-spacing: 0;
+        margin-bottom: 20px;
+        overflow: hidden; /* Cần thiết để bo tròn góc bảng */
+        border-radius: 8px; /* Bo tròn góc bảng */
+    }
+
+    /* Tiêu đề bảng (header) */
+    .info-table thead tr {
+        background-color: #007bff;
+        color: #ffffff;
+    }
+
+    .info-table th {
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    /* Nội dung bảng (body) */
+    .info-table tbody tr {
+        background-color: #ffffff;
+        border-bottom: 1px solid #dee2e6;
+        transition: background-color 0.3s ease;
+    }
+
+    .info-table tbody tr:hover {
+        background-color: #e9ecef; /* Hiệu ứng khi di chuột */
+    }
+
+    .info-table td {
+        padding: 15px;
+        color: #495057;
+    }
+    
+    /* Thiết lập lại kiểu cho phần tử chứa ảnh */
+    .info-table td[colspan="2"] {
+        text-align: center;
+        padding: 20px 15px;
+        background-color: #f1f1f1;
+        border-bottom: none;
+    }
+
+    /* Ảnh */
+    .info-table img {
+        display: block; 
+        margin: 10px auto; 
+        border-radius: 8px;
+        border: 3px solid #ced4da;
+        object-fit: cover; /* Đảm bảo hình ảnh vừa vặn */
+    }
+
+    /* Chú thích ảnh */
+    .image-caption {
+        margin-bottom: 15px; 
+        color: #6c757d;
+        font-style: italic;
+    }
+    
+    /* Ghi chú cuối trang */
+    .footer-note {
+        text-align: center; 
+        margin-top: 25px; 
+        font-size: 1em; 
+        color: #6c757d;
+        padding-top: 10px;
+        border-top: 1px dashed #ced4da;
+    }
+</style>
+
+<div class="personal-info-container">
+    <h2><i class="fas fa-user-circle"></i> Personal Information</h2>
+    
+    <table class="info-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Basic information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Name : Lam Viet Anh</td>
+                <td>Class : 24CTT</td>
+            </tr>
+            <tr>
+                <td>Student ID : 241160003</td>
+                <td>College School : DAI VIET SAI GON COLLEGE </td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>tommy1098723@gmail.com</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p class="image-caption">Đây là hình từ thư mục static :</p>
+                    <img src="{{ url_for('static', filename='logo.png') }}" 
+                         width="300" 
+                         height="150"
+                         alt="Logo Placeholder" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/300x150/007bff/ffffff?text=H%C3%8CNH+%E1%BA%A2NH';"
+                         style="max-width: 100%;">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p class="footer-note">
+        Day 24.11.2025 
+    </p>
+</div>
+{% endblock %}

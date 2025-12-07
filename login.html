@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}Login / Register{% endblock %}
+
+{% block content %}
+
+<style>
+    .auth-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 90vh;
+
+        /* REMOVE outer background */
+        background: white !important;
+    }
+
+    .auth-box {
+        width: 850px;
+        height: 500px;
+        background: white;
+        border-radius: 25px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        display: flex;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* PURPLE/BLUE LEFT PANEL */
+    .left-panel {
+        width: 40%;
+        background: linear-gradient(to bottom right, #6A5AE0, #1E90FF);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .right-panel {
+        width: 60%;
+        padding: 40px;
+        position: relative;
+        background: white;
+    }
+
+    .form-box {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        width: calc(100% - 80px);
+        transition: 0.5s;
+    }
+
+    #loginBox { z-index: 20; }
+    #signupBox { opacity: 0; z-index: 10; }
+
+    .active #loginBox { opacity: 0; z-index: 10; }
+    .active #signupBox { opacity: 1; z-index: 20; }
+
+    .auth-btn {
+        background: #6A5AE0 !important;
+        color: white;
+        transition: 0.3s;
+    }
+
+    .auth-btn:hover {
+        background: #594bcc !important;
+    }
+
+    .link-accent {
+        color: #6A5AE0;
+    }
+
+    .link-accent:hover {
+        color: #1E90FF;
+    }
+</style>
+
+
+<div class="auth-wrapper">
+
+    <div class="auth-box" id="authBox">
+
+        <!-- LEFT PURPLE PANEL -->
+        <div class="left-panel">
+            <div>
+                <h1 class="text-3xl font-bold">Shop Flask</h1>
+                <p class="mt-2 text-lg">Welcome 👋</p>
+
+                <button onclick="switchToRegister()"
+                        class="mt-6 px-6 py-2 border border-white rounded-lg">
+                    Create Account
+                </button>
+            </div>
+        </div>
+
+        <!-- RIGHT WHITE PANEL -->
+        <div class="right-panel">
+
+            <!-- LOGIN FORM -->
+            <div id="loginBox" class="form-box">
+                <h2 class="text-2xl font-bold mb-4 text-[#6A5AE0]">Login</h2>
+
+                <form method="POST" action="{{ url_for('login') }}">
+                    <input type="text" name="username" placeholder="Username"
+                           class="w-full mb-3 bg-gray-100 px-4 py-3 rounded-lg" required>
+
+                    <input type="password" name="password" placeholder="Password"
+                           class="w-full mb-4 bg-gray-100 px-4 py-3 rounded-lg" required>
+
+                    <div class="flex justify-between text-sm mb-3">
+                        <a href="#" class="link-accent">Forgot password?</a>
+                        <span onclick="switchToRegister()" class="link-accent cursor-pointer">
+                            Register
+                        </span>
+                    </div>
+
+                    <button class="w-full py-3 rounded-lg auth-btn">Login</button>
+                </form>
+            </div>
+
+            <!-- REGISTER FORM -->
+            <div id="signupBox" class="form-box">
+                <h2 class="text-2xl font-bold mb-4 text-[#6A5AE0]">Create Account</h2>
+
+                <form onsubmit="handleRegister(event)">
+                    <input type="text" id="new-username" placeholder="Username"
+                           class="w-full mb-3 bg-gray-100 px-4 py-3 rounded-lg" required>
+
+                    <input type="email" id="email" placeholder="Email"
+                           class="w-full mb-3 bg-gray-100 px-4 py-3 rounded-lg" required>
+
+                    <input type="password" id="new-password" placeholder="Password"
+                           class="w-full mb-3 bg-gray-100 px-4 py-3 rounded-lg" required>
+
+                    <input type="password" id="confirm-password" placeholder="Confirm Password"
+                           class="w-full mb-4 bg-gray-100 px-4 py-3 rounded-lg" required>
+
+                    <button class="w-full py-3 rounded-lg auth-btn">Register</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+function switchToRegister() {
+    document.getElementById("authBox").classList.add("active");
+}
+
+function switchToLogin() {
+    document.getElementById("authBox").classList.remove("active");
+}
+
+function handleRegister(e) {
+    e.preventDefault();
+
+    const pass = document.getElementById("new-password").value;
+    const confirm = document.getElementById("confirm-password").value;
+
+    if (pass !== confirm) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+    alert("Registration successful!");
+    switchToLogin();
+}
+</script>
+
+{% endblock %}
